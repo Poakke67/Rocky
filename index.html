@@ -449,7 +449,7 @@
                 </div>
                 <div>
                     <div class="price">500 <span>лир</span></div>
-                    <a href="#" class="btn">Записаться</a>
+                    <a href="https://t.me/Poakke?text=Здравствуйте,%20Алина!%20Меня%20интересует%20консультация%20по%20ИИ." target="_blank" class="btn">Записаться</a>
                 </div>
             </div>
 
@@ -460,7 +460,7 @@
                 </div>
                 <div>
                     <div class="price">1000 <span>лир</span></div>
-                    <a href="#" class="btn">Заказать сайт</a>
+                    <a href="https://t.me/Poakke?text=Здравствуйте,%20Алина!%20Меня%20интересует%20разработка%20сайта." target="_blank" class="btn">Заказать сайт</a>
                 </div>
             </div>
 
@@ -476,8 +476,10 @@
             const btn = document.getElementById('generateBtn');
             const output = document.getElementById('codeOutput');
             
-            // Текст, который будет "печатать" ИИ
-            const codeToType = `// Инициализация нейросети
+            // Создаем список (массив) из 3 разных вариантов кода
+            const codeOptions = [
+// ВАРИАНТ 1: Настройка ИИ-разработчика
+`// Инициализация нейросети
 const alinaAI = new AI_Developer({
   framework: 'CleanCode',
   style: 'Cyberpunk Glassmorphism',
@@ -491,27 +493,70 @@ alinaAI.buildWebsite({
   conversionRate: 'Maximized'
 });
 
-> Успешно! Продающий сайт создан и готов к работе. 🚀`;
+> Успешно! Продающий сайт создан и готов к работе. 🚀`,
+
+// ВАРИАНТ 2: ИИ пишет React-компонент
+`// AI Generation: Hero Section Component
+import { Glassmorphism, NeonGlow } from '@alina/ui-kit';
+
+function HeroSection() {
+  return (
+    <Glassmorphism intensity="high" blur="20px">
+      <NeonGlow color="#00f0ff" animation="pulse">
+        <h1>Сайты, которые приносят деньги</h1>
+      </NeonGlow>
+      <button className="btn-conversion-max">
+        Начать проект
+      </button>
+    </Glassmorphism>
+  );
+}
+
+> Верстка завершена. Адаптивность 100%. 📱💻`,
+
+// ВАРИАНТ 3: Подключение нейросетей для контента
+`// Подключение API для генерации контента
+async function generateSiteAssets() {
+  const images = await MidjourneyAPI.generate({
+    prompt: 'futuristic web design, highly detailed, 8k',
+    style: 'cyberpunk'
+  });
+  
+  const texts = await ChatGPT.writeCopy({
+    niche: 'Эксперт',
+    toneOfVoice: 'Продающий и уверенный'
+  });
+  
+  return { images, texts };
+}
+
+> Ассеты загружены. Идеальное попадание в ЦА. 🎯`
+            ];
 
             let i = 0;
             let isTyping = false;
+            let currentCode = "";
 
             btn.addEventListener('click', () => {
                 if (isTyping) return; // Защита от двойного клика
                 
                 isTyping = true;
-                output.innerHTML = ''; // Очищаем окно
+                output.innerHTML = ''; // Очищаем окно терминала
                 i = 0;
                 btn.textContent = 'ИИ пишет код...';
                 
+                // ВЫБИРАЕМ СЛУЧАЙНЫЙ ВАРИАНТ КОДА (от 0 до 2)
+                const randomIndex = Math.floor(Math.random() * codeOptions.length);
+                currentCode = codeOptions[randomIndex];
+                
                 function typeWriter() {
-                    if (i < codeToType.length) {
-                        output.innerHTML += codeToType.charAt(i);
+                    if (i < currentCode.length) {
+                        output.innerHTML += currentCode.charAt(i);
                         i++;
                         // Скорость печати (в миллисекундах)
                         setTimeout(typeWriter, 30); 
                     } else {
-                        btn.textContent = 'Готово! Попробуйте еще раз';
+                        btn.textContent = 'Сгенерировать другой код';
                         isTyping = false;
                     }
                 }
